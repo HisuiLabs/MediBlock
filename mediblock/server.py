@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from blockchain import BlockChain, Transaction
 
 app = Flask(__name__)
-
+CORS(app)
 blockchain = BlockChain()
 
 @app.route('/', methods=['GET'])
@@ -47,4 +48,5 @@ def full_chain():
     return jsonify(response), 200
 
 if __name__ == '__main__':
+    app.denug = True
     app.run(host='0.0.0.0', port=5000)
