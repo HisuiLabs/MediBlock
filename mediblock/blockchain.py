@@ -25,12 +25,14 @@ class BlockChain(object):
     def hash(self, block):
         return hashlib.sha256(json.dumps(block).encode()).hexdigest()
     
-    def add_transaction(self, sender_blockchain_address, recipient_blockchain_address, value, drug):
+    def add_transaction(self, date_dispensing: str, pharmacy: str, medical_institution_name: str, drug_name: str, value: int, supply: int):
         transaction = {
-            'sender_blockchain_address': sender_blockchain_address,
-            'recipient_blockchain_address': recipient_blockchain_address,
-            'drug_name': drug,
+            'date_dispensing': date_dispensing,
+            'pharmacy': pharmacy,
+            'medical_institution_name': medical_institution_name,
+            'drug_name': drug_name,
             'value': value,
+            'supply': supply
         }
         self.transaction_pool.append(transaction)
     
@@ -54,15 +56,17 @@ class BlockChain(object):
 
         return nonce
     
-    MINING_SENDER = "THE BLOCKCHAIN"
-    MINING_REWARD = 1
+    MINING_SENDER = "DRUG STORE"
+    MINING_REWARD = None
 
     def mining(self):
         self.add_transaction(
-            sender_blockchain_address=self.MINING_SENDER,
-            recipient_blockchain_address=self.blockchain_address,
+            date_dispensing="",
+            pharmacy=self.MINING_SENDER,
+            medical_institution_name="",
+            drug_name="",
             value=self.MINING_REWARD,
-            drug="None"
+            supply=None
         )
 
         nonce = self.proof_of_work()
@@ -74,20 +78,24 @@ class BlockChain(object):
     
 class Transaction(object):
 
-    def __init__(self, sender_sk, sender_pk, sender_blockchain_address, recipient_blockchain_address, value, drug):
+    def __init__(self, sender_sk, sender_pk, date_dispensing: str, pharmacy: str, medical_institution_name: str, drug_name: str, value: int, supply: int):
         self.sender_sk = sender_sk
         self.sender_pk = sender_pk
-        self.sender_blockchain_address = sender_blockchain_address
-        self.recipient_blockchain_address = recipient_blockchain_address
+        self.day_dispensing = date_dispensing
+        self.pharmacy = pharmacy
+        self.medical_institution_name = medical_institution_name
+        self.drug_name = drug_name
         self.value = value
-        self.drug = drug
+        self.supply = supply
 
     def generate_signature(self):
         transaction = {
-            'sender_blockchain_address': self.sender_blockchain_address,
-            'recipient_blockchain_address': self.recipient_blockchain_address,
-            'drug_name': self.drug,
+            'day_dispensing': self.day_dispensing,
+            'pharmacy': self.pharmacy,
+            'medical_institution_name': self.medical_institution_name,
+            'drug_name': self.drug_name,
             'value': self.value,
+            'supply': self.supply
         }
         sha256 = hashlib.sha256()
         sha256.update(str(transaction).encode('utf-8'))

@@ -13,16 +13,18 @@ def index():
 @app.route('/transactions/new', methods=['POST'])
 def new_transaction():
     values = request.get_json()
-    required = ['sender_blockchain_address', 'recipient_blockchain_address', 'value', 'drug']
+    required = ['date_dispensing', 'pharmacy', 'medical_institution_name', 'drug_name', 'value', 'supply']
     if not all(k in values for k in required):
         return 'Missing values', 400
     
-    sender_blockchain_address = values['sender_blockchain_address']
-    recipient_blockchain_address = values['recipient_blockchain_address']
+    day_dispensing = values['date_dispensing']
+    pharmacy = values['pharmacy']
+    medical_institution_name = values['medical_institution_name']
+    drug_name = values['drug_name']
     value = values['value']
-    drug = values['drug']
+    supply = values['supply']
     
-    blockchain.add_transaction(sender_blockchain_address, recipient_blockchain_address, value, drug)
+    blockchain.add_transaction(day_dispensing, pharmacy, medical_institution_name, drug_name, value, supply)
     
     response = {'message': 'Transaction will be added to Block '}
     return jsonify(response), 201
@@ -32,10 +34,7 @@ def mine():
     block = blockchain.mining()
     
     response = {
-        "sender_blockchain_address": blockchain.MINING_SENDER,
-        "recipient_blockchain_address": blockchain.blockchain_address,
-        "drug": "None",
-        "value": blockchain.MINING_REWARD,
+        'message': 'New Block Mined',
     }
     return jsonify(response), 200
 
