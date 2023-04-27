@@ -35,8 +35,6 @@ def mine():
     
     response = {
         'message': 'New Block Mined',
-
-        
     }
     return jsonify(response), 200
 

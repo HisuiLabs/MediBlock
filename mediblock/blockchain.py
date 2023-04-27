@@ -57,7 +57,7 @@ class BlockChain(object):
         return nonce
     
     MINING_SENDER = "DRUG STORE"
-    MINING_REWARD = 0
+    MINING_REWARD = None
 
     def mining(self):
         self.add_transaction(
@@ -66,7 +66,7 @@ class BlockChain(object):
             medical_institution_name="",
             drug_name="",
             value=self.MINING_REWARD,
-            supply=0
+            supply=None
         )
 
         nonce = self.proof_of_work()
