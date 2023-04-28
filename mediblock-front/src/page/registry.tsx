@@ -20,7 +20,7 @@ export const Registry = () => {
 
   return (
     <div>
-      <h1>登録画面</h1>
+      <h1>registry</h1>
       <form onSubmit={handleSubmit}>
         <div>
           薬局:{" "}

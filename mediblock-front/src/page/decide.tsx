@@ -1,7 +1,7 @@
 export const Decide = () => {
     return (
       <div>
-        <h1>確認画面</h1>
+        <h1>decide</h1>
         <div>
             decide()
         </div>

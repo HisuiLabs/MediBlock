@@ -1,7 +1,7 @@
-export const Confirm = () => {
+export const Home = () => {
     return (
       <div>
-        <h1>Confirm</h1>
+        <h1>home</h1>
         <div>
         <h2>
             <dt>薬局</dt>
