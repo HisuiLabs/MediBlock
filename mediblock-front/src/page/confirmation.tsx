@@ -1,22 +1,43 @@
+import { useNavigate } from "react-router-dom";
 export const Confirm = () => {
-    return (
+  const form = JSON.parse(localStorage.getItem("form") || "{}");
+  const navigate = useNavigate();
+
+  // JSON.stringify()を使って、フォームの内容を文字列化したデータをコンソールに出力する
+  console.log(JSON.stringify(form));
+  
+  //registry.tsxのフォームの内容を表示する
+
+  return (
+    <div>
+      <h1>Confirm</h1>
       <div>
-        <h1>確認画面</h1>
-        <div>
-        <h2>
-            <dt>薬局</dt>
-            <dd id="hoge1"></dd>
-        </h2><h2>
-                <dt>医療機関</dt>
-                <dd id="hoge2"></dd>
-            </h2><h2>
-                <dt>薬の名前</dt>
-                <dd id="hoge3"></dd>
-            </h2><h2>
-                <dt>頻度</dt>
-                <dd id="hoge4"></dd>
-            </h2>
-        </div>
+        薬局: <input type="text" name="薬局" value={form.薬局} readOnly />
       </div>
-    );
-  };
+      <div>
+        医療機関: <input type="text" name="医療機関" value={form.医療機関} readOnly />
+      </div>
+      <div>
+        薬の名前: <input type="text" name="薬の名前" value={form.薬の名前} readOnly />
+      </div>
+      <div>
+        頻度: <input type="text" name="頻度" value={form.頻度} readOnly />
+      </div>
+      <div>
+          量:{" "}
+          <input
+            type="text"
+            name="量"
+            value={form.薬の名前} readOnly
+          />
+        </div>
+      <button type="submit" onClick={() => navigate("/registry")}>
+        戻る
+      </button>
+      <button type="submit" onClick={() => navigate("/")}>
+        完了
+      </button>
+    </div>
+
+  );
+};

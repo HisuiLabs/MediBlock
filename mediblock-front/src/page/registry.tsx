@@ -1,12 +1,16 @@
 import { useState } from "react";
-//import axios from "axios";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Registry = () => {
+  const navigate = useNavigate(); // useNavigateフックをインポート
+
   const [form, setForm] = useState({
     薬局: "",
     医療機関: "",
     薬の名前: "",
-    頻度: ""
+    頻度: "",
+    量: "",
   });
 
   const handleChange = (event: any) => {
@@ -15,12 +19,25 @@ export const Registry = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    
+
+    // axiosを使ってPOSTリクエストを送信する
+    const response = await transaction_post_json('/transactions/new', form);
+    console.log(response);
   };
+  //formの内容をjsonでPOSTする
+  const transaction_post_json = async (url: string, form: any) => {
+    const response = await axios.post(url, form, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return response;
+  };
+
 
   return (
     <div>
-      <h1>登録画面</h1>
+      <h1>registry</h1>
       <form onSubmit={handleSubmit}>
         <div>
           薬局:{" "}
@@ -47,7 +64,19 @@ export const Registry = () => {
         <div>
           頻度: <input type="text" name="頻度" value={form.頻度} onChange={handleChange} />
         </div>
-        <button type="submit">登録</button>
+        <div>
+          量:{" "}
+          <input
+            type="text"
+            name="量"
+            value={form.量}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit" onClick={() => navigate("/Confirm")}>
+          確認
+        </button>
+
       </form>
     </div>
   );
