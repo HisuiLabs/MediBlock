@@ -24,6 +24,14 @@ export const Decide = () => {
       <div>
         頻度: <input type="text" name="頻度" value={form.頻度} readOnly />
       </div>
+      <div>
+          量:{" "}
+          <input
+            type="text"
+            name="量"
+            value={form.薬の名前} readOnly
+          />
+        </div>
       <button type="submit" onClick={() => navigate("/registry")}>
         戻る
       </button>

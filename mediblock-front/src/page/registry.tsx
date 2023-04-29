@@ -9,7 +9,8 @@ export const Registry = () => {
     薬局: "",
     医療機関: "",
     薬の名前: "",
-    頻度: ""
+    頻度: "",
+    量: "",
   });
 
   const handleChange = (event: any) => {
@@ -62,6 +63,15 @@ export const Registry = () => {
         </div>
         <div>
           頻度: <input type="text" name="頻度" value={form.頻度} onChange={handleChange} />
+        </div>
+        <div>
+          量:{" "}
+          <input
+            type="text"
+            name="量"
+            value={form.量}
+            onChange={handleChange}
+          />
         </div>
         <button type="submit" onClick={() => navigate("/Confirm")}>
           確認
