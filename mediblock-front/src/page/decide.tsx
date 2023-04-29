@@ -32,7 +32,7 @@ export const Decide = () => {
             value={form.薬の名前} readOnly
           />
         </div>
-      <button type="submit" onClick={() => navigate("/registry")}>
+      <button type="submit" onClick={() => navigate("/")}>
         戻る
       </button>
     </div>
