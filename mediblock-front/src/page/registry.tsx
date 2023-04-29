@@ -22,9 +22,6 @@ export const Registry = () => {
     // axiosを使ってPOSTリクエストを送信する
     const response = await transaction_post_json('/transactions/new', form);
     console.log(response);
-
-    // /confirmに遷移する
-    navigate("/confirm");
   };
   //formの内容をjsonでPOSTする
   const transaction_post_json = async (url: string, form: any) => {
@@ -66,7 +63,10 @@ export const Registry = () => {
         <div>
           頻度: <input type="text" name="頻度" value={form.頻度} onChange={handleChange} />
         </div>
-        <button type="submit">決定</button>
+        <button type="submit" onClick={() => navigate("/Confirm")}>
+          確認
+        </button>
+
       </form>
     </div>
   );
