@@ -54,3 +54,8 @@ class Paillier:
         # assert(0 <= c < n*n)
         return (self.L(pow(c, lamda, n*n), n) * mu) % n
     
+
+    def sign_transaction(self, transaction: dict, private_key: int) -> dict:
+        # sign transaction
+        transaction['signature'] = self.paillier_encrypt(transaction['value'], private_key)
+        return transaction
